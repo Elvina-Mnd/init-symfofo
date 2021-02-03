@@ -6,13 +6,18 @@
 {% block body %}
 
 <div class="container">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% include '_carousel.html.twig' %}
+    <div class="jumbotron">
+        <h1>Nanga def</h1>
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, quam. Odit quo, accusamus inventore, rerum quaerat voluptatibus accusantium odio consequatur libero perspiciatis cum deleniti a, soluta facilis ipsa eius et?</p>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/vina/Documents/Code/test/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/vina/Documents/Code/test/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+    <div class="row pt-5">
+        {% for category in categories %}
+        {% include '_stylecard.html.twig' %}
+        {% endfor %}
+    </div>
+
 </div>
 
 {% endblock %}

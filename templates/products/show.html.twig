@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{product.name}}{% endblock %}
+{% block body %}
+	<div class="container container-one-product">
+	<a href="javascript:history.go(-1)" class="return-show">Retour à la page précédente</a>
+		<div class="row">
+			<div class="col-lg-6">
+				<img src="{{product.image}}" alt="{{product.name}}" class="img-fluid img-shadow" width="100%">
+			</div>
+			<div class="col-lg-6">
+				<div class="presentation">
+					<h1 class="title-product">{{product.name}}</h1>
+					<p class="price">{{product.price}} €</p>
+					<p class="description-title">DESCRIPTION</p>
+					<p class="lead">{{product.description}}</p>
+				</div>
+				<div class="text-center">
+					{# <a href="{{path('cart_add', {'id' : product.id})}}" class="btn-fra"> #}
+						<i class="fas fa-shopping-cart"></i>
+						Ajouter au panier</a>
+				</div>
+			</div>
+			<div class="container advice col-lg-5 mt-5">
+				<div class="container">
+				
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid similar-products">
+			<div class="container mt-5">
+			<p class="title-similar-products">Produits similaires</p>
+				<h3 class="title-promo">Nos clients ont aussi aimé</h3>
+				<div class="row">
+				{# {% for i in 0..2 %}
+					<div class="col-lg-4 col-md-6 col-sm-12 my-3 card-one">
+						<a href="{{path ('product_show', {'slug': suggestions[i].slug})}}" id="suggestion-link">
+						<img src="{{suggestions[i].image}}" class="card-img topimage _b1" alt="{{suggestions[i].name}}">
+						<div class="card-body text-center">
+							<h5 class="card-title-article">{{suggestions[i].name}}</h5></a>
+							<p class="from">à partir de {{suggestions[i].price}}€</p>
+							{% for style in product.style %}
+								<p class="hashtags">#{{style.name}}</p>
+                   			{% endfor %}
+						</div>
+					</div>
+					{% endfor %} #}
+				</div>
+			</div>
+		</div>
+    </div>
+
+	{% endblock %}
+
