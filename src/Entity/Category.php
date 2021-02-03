@@ -29,6 +29,11 @@ class Category
      */
     private $slug;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
      */
