@@ -31,6 +31,7 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Catégorie'),
+            TextField::new('image', 'Url de l\'image'),
         ];
     }
 
