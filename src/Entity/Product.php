@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -21,7 +22,6 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
@@ -63,12 +63,12 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity=Gender::class, mappedBy="products")
      */
-    private $genders;
+    private $gender;
 
     public function __construct()
     {
         $this->sizes = new ArrayCollection();
-        $this->genders = new ArrayCollection();
+        $this->gender = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,9 +190,9 @@ class Product
     /**
      * @return Collection|Gender[]
      */
-    public function getGenders(): Collection
+    public function getGender(): Collection
     {
-        return $this->genders;
+        return $this->gender;
     }
 
     public function addGender(Gender $gender): self
