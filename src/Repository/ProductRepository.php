@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Data\SearchProductData;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,37 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function searchProduct(SearchProductData $search)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this
+            ->createQueryBuilder('product')
+            ->from($this->_entityName, 'p')
+            ->innerJoin('product.category', 'category')
+            ->leftJoin('product.gender', 'gender');
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if (!empty($search->category)) {
+            $query = $query
+                ->andWhere('category.id IN (:category)')
+                ->setParameter('category', $search->category);
+        }
+
+        if (!empty($search->gender)) {
+            $query = $query
+                ->andWhere('gender.id IN (:gender)')
+                ->setParameter('gender', $search->gender);
+        }
+
+        if (!empty($search->q)) {
+            $query = $query
+                ->andWhere('product.name LIKE :q 
+                OR product.description LIKE :q
+                OR category.name LIKE :q
+                OR gender.name LIKE :q')
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+        $query = $query->getQuery()->getResult();
+        return $query;
     }
-    */
+
 }
