@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid subnav-bg">
+    <div class="row justify-content-around align-items-center p-2">
+        <div class="text-center col-lg-10 ml-5">
+            <h1 class="text-subnav m-3">Découvrez tous nos produits</h1>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-5">
+    {# <div class="row mt-5 mx-auto">
+        <div class="col-lg-3 col-md-4 col-sm-10 pt-3 mx-auto card-filter">
+            {{form_start(searchForm, {attr: {class:'filter'}})}}
+            <div class="pl-2 pt-2">
+                {{form_row(searchForm.q)}}
+            </div>
+            <div class="text-center pb-3 pt-3">
+                <button type="submit" class="btn-framboise-filtre"> Rechercher</button>
+            </div>
+            <div class="pt-4 pl-3">
+                <h2 class="filter-design">Filtr<span class="small-ellipse">es</span></h2>
+                <hr>
+                {{form_row(searchForm.gender)}}
+                <hr>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div>
+                    <div id="headingOne">
+                        <button class="btn text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <h3 class="color-letter">Styles</h3>
+                        </button> <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            {{ form_row(searchForm.style)}}
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="headingTwo">
+                        <button class="btn text-left collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <h3 class="color-letter">Catégories</h3>
+                        </button> <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            {{ form_row(searchForm.category)}}
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center pb-3">
+                    <button type="submit" class="btn-framboise-filtre"> Rechercher</button>
+                </div>
+                {{form_end(searchForm)}}
+            </div>
+        </div> #}
+        <div class="col-lg-8 col-md-8">
+                <div class="row">
+                    {% for product in products %}
+                    {% include 'product_card.html.twig'%}
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock %}
