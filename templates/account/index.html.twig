@@ -3,18 +3,23 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<div class="container mt-3">
-	<div class="mt-3 text-center my-3">
-		<h2>Bienvenue chez Nanga def,
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+	 <div class="carousel-caption d-none d-md-block"> <h2 class="welcome-title"> Bienvenue chez Nanga def,
 			{{ app.user.firstname }}
-			{{ app.user.lastname }}
-			!</h2>
-	</div>
+			!</h2> </div>
+      <img class="d-block w-100" src="{{ asset('build/banner22.png') }}" alt="First slide">
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3 mb-5">
+<a href="{{path('shop')}}" class="return-show">Retour à la boutique</a>
 	<div class="row">
-		<div
-			class="col-6">
+		<div class="col-6">
 			{# <img src="{{ asset('build/myprofile.svg') }}" alt="My profile illustration" width="100%"></div> #}
-			<div class="col-lg-6 col-md-6 col-sm-12 my-5">
+			<div class="col-lg-6 dotted-border-account mt-3 pt-5 text-center">
 				<ul>
 					<li>
 						<h5>
@@ -25,7 +30,7 @@
 					<br>
 					<li>
 						<h5>
-							<span class="titles-account">Adresse de livraison</span>
+							<span class="titles-account">Adresse de livraison:</span>
 							<br>
 							{{ app.user.address }}
 							<br>
@@ -35,8 +40,16 @@
 						</h5>
 					</li>
 					<br>
+					<li>
+					<div class="text-center">
+					<a href="{{path('commands_all')}}" class="btn-orange">Voir mes commandes</a>
+					</div>
+					</li>
 				</ul>
 			</div>
+		</div>
+		<div class="col-6">
+			<img src="{{ asset('build/illu.jpg') }}" alt="illustration" width="80%" class="card-filter">
 		</div>
 	</div>
 </div>

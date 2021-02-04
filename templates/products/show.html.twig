@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{product.name}}{% endblock %}
 {% block body %}
+
 	<div class="container container-one-product">
+	<div class="mb-5 mt-3">
 	<a href="javascript:history.go(-1)" class="return-show">Retour à la page précédente</a>
+	</div>
 		<div class="row">
 			<div class="col-lg-6">
 				<img src="{{product.image}}" alt="{{product.name}}" class="img-fluid img-shadow" width="100%">
@@ -11,39 +14,50 @@
 				<div class="presentation">
 					<h1 class="title-product">{{product.name}}</h1>
 					<p class="price">{{product.price}} €</p>
-					<p class="description-title">DESCRIPTION</p>
-					<p class="lead">{{product.description}}</p>
+					
+					<div class="deliver dotted-border">
+					<div class="special-offer text-center ">
+					Offre spéciale boutique
+					</div>
+					<p><br> Frais de port offert à partir de 100 € d'achat.
+					Jusqu'à -10.0% à partir de 180 € d'achat.</p>
+					</div>
+					<div class="container">
 				</div>
+					<ul class="product-highlights-block">
+						<li> <i class="fa fa-calendar"></i> Paiement en 3 fois</li>
+						<li> <i class="fa fa-undo"></i> Satisfait ou remboursé</li>
+						<li> <i class="fa fa-lock"></i> Transactions sécurisées</li>
+					</ul>
+				</div>
+
 				<div class="text-center">
-					<a href="{{path('cart_add', {'id' : product.id})}}" class="btn-fra">
+				<label for="pet-select"> <strong>Sélectionnez votre taille: </strong></label>
+                        <select name="size" id="size">
+					{% for detail in product.sizes %}
+                                <option value="{{detail.id}}">{{detail.name}}</option>
+                            {% endfor %}
+                        </select>
+					<a href="{{path('cart_add', {'id' : product.id})}}" class="cart-button">
 						<i class="fas fa-shopping-cart"></i>
 						Ajouter au panier</a>
 				</div>
 			</div>
-			<div class="container advice col-lg-5 mt-5">
-				<div class="container">
-				
-				</div>
-			</div>
 		</div>
-		<div class="container-fluid similar-products">
+		<div class="container-fluid">
 			<div class="container mt-5">
-			<p class="title-similar-products">Produits similaires</p>
 				<h3 class="title-promo">Nos clients ont aussi aimé</h3>
 				<div class="row">
-				{# {% for i in 0..2 %}
+				{% for i in 0..2 %}
 					<div class="col-lg-4 col-md-6 col-sm-12 my-3 card-one">
 						<a href="{{path ('product_show', {'slug': suggestions[i].slug})}}" id="suggestion-link">
 						<img src="{{suggestions[i].image}}" class="card-img topimage _b1" alt="{{suggestions[i].name}}">
-						<div class="card-body text-center">
+						<div class="card-body text-center card-body-all">
 							<h5 class="card-title-article">{{suggestions[i].name}}</h5></a>
 							<p class="from">à partir de {{suggestions[i].price}}€</p>
-							{% for style in product.style %}
-								<p class="hashtags">#{{style.name}}</p>
-                   			{% endfor %}
 						</div>
 					</div>
-					{% endfor %} #}
+					{% endfor %}
 				</div>
 			</div>
 		</div>

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Size;
+use App\Form\SizeType;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\SearchFormType;
+use App\Service\CartService;
 use App\Data\SearchProductData;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,10 +45,22 @@ class ProductController extends AbstractController
      * @Route("/produits/{slug}", name="product_show")
      * @ParamConverter("product", class="App\Entity\Product", options={"mapping": {"slug": "slug"}})
      */
-    public function showProduct(Product $product): Response
+    public function showProduct(Product $product, ProductRepository $productRepository,  Request $request, CartService $cartService): Response
     {
+        $products = $productRepository->findAll();
+        $result = [];
+
+        foreach($products as $item)
+        {
+            if($item->getId() !== $product->getId())
+            {
+                $result[] = $item;
+            }
+        }
+        
         return $this->render('products/show.html.twig', [
-            'product' => $product,     
+            'product' => $product,   
+            'suggestions' => $result,
         ]);
     }
 }
