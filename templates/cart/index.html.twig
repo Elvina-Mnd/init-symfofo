@@ -60,7 +60,13 @@
 				</div>
 			</div>
             <div class="text-center btn-checkout">
-                <a href="{{path('cart_successcart')}}" class="btn-fra"><i class="fas fa-credit-card"></i> Procéder au paiement</a>
+			<form method="POST" id="confirm">
+						<input type="text" class="d-none" name="command">
+						<div class="my-4 text-center">
+							<button type="submit" class="btn btn-success"><i class="fas fa-credit-card"></i>Procéder au paiement</button>
+						</div>
+					</form>
+			
             </div>
 		{% else %}
 			<div class="text-center">

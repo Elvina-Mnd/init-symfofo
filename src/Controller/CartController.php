@@ -28,8 +28,14 @@ class CartController extends AbstractController
 
     public function index(): Response
     {
+        $user = $this->getUser();
         $cartInfos = $this->cartService->getCartInfos();
         $total = $this->cartService->getTotalCart();
+
+        if (isset($_POST['command'])) {
+            $invoiceProducts = $this->cartService->command($user);
+            return $this->render('cart/successorder.html.twig', ['invoiceProducts' => $invoiceProducts]);
+            }
 
         return $this->render('cart/index.html.twig', [
             'items' => $cartInfos,

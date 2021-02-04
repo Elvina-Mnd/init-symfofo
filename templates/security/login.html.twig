@@ -18,11 +18,11 @@
         value="{{ csrf_token('authenticate') }}">
 
     <div class="text-center">
-            <button class="btn btn-lg btn-success" type="submit">Se connecter</button>
+            <button class="btn-orange" type="submit">Se connecter</button>
         </div>
+</form>
         <div class="text-center link-login">
             <a href="{{path('register')}}">Pas encore de compte ? S'inscrire</a>
         </div>
-</form>
 </div>
 {% endblock %}

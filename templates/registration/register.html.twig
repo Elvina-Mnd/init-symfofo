@@ -24,17 +24,17 @@
         {{ form_row(registrationForm.address, {
             label: 'Addresse'
         }) }}
-        {{ form_row(registrationForm.city, {
-            label: 'Ville'
-        }) }}
         {{ form_row(registrationForm.zipcode, {
             label: 'Code postal'
+        }) }}
+        {{ form_row(registrationForm.city, {
+            label: 'Ville'
         }) }}
         {{ form_row(registrationForm.agreeTerms, {
             label: 'J\'accepte les conditions générales d\'utilisation de Nanga Def'
         }) }}
         <div class="text-center">
-        <button type="submit" class="btn btn-primary">Valider mon inscription</button>
+        <button type="submit" class="btn-orange">Valider mon inscription</button>
         </div>
     {{ form_end(registrationForm) }}
 </div>
