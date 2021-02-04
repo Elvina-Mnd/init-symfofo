@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire
+{% endblock %}
+
+{% block body %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+    <div class="container-fluid test-regi">
+	<div class="container">
+
+		<div class="container-registration ml-2 mr-2 test-form ">
+		<h1 class="text-center">Rejoignez la #Nanga Def style</h1>
+		<h2 class="text-center">et profitez ainsi des bons plans et des nouveautés !</h2>
+			<div class="row">
+				<div
+					class="col-lg-4 col-md-12 col-sm-12">{# <img class="image-registration d-none d-lg-block" src="https://i0.wp.com/diasporaechos.fr/wp-content/uploads/2018/02/AFRIKREA1-610x392.jpg?fit=610%2C392&ssl=1" alt="register" width="80%"> #}
+				</div>
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					{{ form_start(registrationForm) }}
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.email) }}
+					</div>
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+					</div>
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.firstname, {
+            label: 'Prénom'
+        }) }}
+					</div>
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.lastname, {
+            label: 'Nom'
+        }) }}
+					</div>
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.address, {
+            label: 'Addresse'
+        }) }}
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.zipcode, {
+            label: 'Code postal'
+        }) }}
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						{{ form_row(registrationForm.city, {
+            label: 'Ville'
+        }) }}
+					</div>
+					<div class="row">
+						<div class="col-5">
+							{{ form_row(registrationForm.agreeTerms, {
+            label: 'J\'accepte les conditions générales d\'utilisation de Nanga Def'
+        }) }}
+						</div>
+					</div>
+				</div>
+					<div class="text-center">
+						<button type="submit" class="btn-orange">Valider mon inscription</button>
+					</div>
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

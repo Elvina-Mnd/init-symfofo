@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier
+{% endblock %}
+
+{% block body %}
+	<div class="container container-cart mt-5">
+		{% if items is not empty %}
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-2">
+					<h1 class="mb-5">Récapitulatif de ma commande</h1>
+                    <div class="text-psst">
+                        <p>Psst... Avez-vous tout ce qu'il vous faut ?</p>
+                        <div class="text-center">
+                            <a href="{{path('shop')}}"class="btn">Continuer vos achats</a>
+                        </div>
+                    </div>
+					<table class="table table-cart">
+						<thead>
+							<tr>
+								<th scope="col">Nom</th>
+								<td></td>
+								<th scope="col">Prix</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Total</th>
+                                <td></td>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in items %}
+								<tr>
+									<td>{{item.product.name}}</td>
+									<td>
+										<img src="{{item.product.image}}" alt="{{item.product.name}}" width="20%"></td>
+									<td>{{item.product.price|format_currency('EUR', locale='de')}}
+										</td>
+									<td>{{item.quantity}}</td>
+									<td>{{(item.product.price * item.quantity) |format_currency('EUR', locale='de')}}
+										</td>
+									<td>
+										<a href="{{path('cart_remove', {'id' : item.product.id})}}" class="btn btn-danger btn-sm">
+											<i class="fas fa-trash"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td class="total-title">
+									TOTAL COMMANDE:
+								</td>
+								<td class="total-price">
+									{{total|format_currency('EUR', locale='fr')}} TTC
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+                    </div>
+				</div>
+			</div>
+            <div class="text-center btn-checkout">
+			<form method="POST" id="confirm">
+						<input type="text" class="d-none" name="command">
+						<div class="my-4 text-center">
+							<button type="submit" class="btn-orange"><i class="fas fa-credit-card"></i> Procéder au paiement</button>
+						</div>
+					</form>
+			
+            </div>
+		{% else %}
+			<div class="text-center">
+				<h1 class="display-4 text-dark big-title">Votre panier est vide !</h1>
+				<img src="{{ asset('build/empty-cart.png') }}" width="35%" alt="empty-cart">
+			</div>
+			<div class="text-center mb-5">
+				<a href="{{path('shop')}}" class="text-lg btn-orange">Retour à la boutique</a>
+			</div>
+	    {% endif %}
+    </div>
+{% endblock %}
+

@@ -24,6 +24,11 @@ class Size
      */
     private $name;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="sizes")
      */

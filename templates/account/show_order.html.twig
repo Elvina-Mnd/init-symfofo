@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+	 <div class="carousel-caption d-none d-md-block"> <h1>Commande du {{ command.createdAt|date("d/m/Y") }} - référence n° {{ command.id }}</h1> </div>
+      <img class="d-block w-100" src="{{ asset('build/banner22.png') }}" alt="First slide">
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+    <a href="javascript:history.go(-1)" class="return-show">Retour à la page précédente</a>
+  
+<table class="table">
+        <thead>
+            <tr>
+                <th>Articles</th>
+                <th>Quantité</th>
+                <th class="d-none d-sm-table-cell">Prix</th> 
+            </tr>
+        </thead>
+        <tbody>
+                {% for product in products %}
+            <tr>
+                <td><a href="#">{{ product.product.name }}</a></td>
+                <td>{{ product.quantity }}</td>
+                <td class="d-none d-sm-table-cell">{{ product.price |format_currency('EUR', locale='de') }}</td>
+            </tr>
+                {% endfor %}
+                <th>TOTAL</th>
+                <th></th>
+                <th>{{ command.total |format_currency('EUR', locale='de') }}</th>
+                <td>
+            <tr>
+                <td>Adresse de livraison : <br>{{ app.user.address }} <br>{{ app.user.zipcode }} {{ app.user.city }}
+            </tr>
+            </td>    
+        </tbody>
+    </table>
+</div>
+{% endblock %}

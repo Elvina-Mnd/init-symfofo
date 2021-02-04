@@ -2,46 +2,52 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
-use App\Entity\Category;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
+use Doctrine\ORM\QueryBuilder;
+use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\Request;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 
-class ProductCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Product::class;
+        return User::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle(Crud::PAGE_INDEX, 'Admin | Produits')
-            ->setPageTitle(Crud::PAGE_NEW, 'Admin | Ajout d\'un produit')
-            ->setPageTitle(Crud::PAGE_EDIT, 'Admin | Modification d\'un produit ');
+            ->setPageTitle(Crud::PAGE_INDEX, 'Admin | Acheteurs')
+            ->setPageTitle(Crud::PAGE_NEW, 'Admin | Ajout d\'un client')
+            ->setPageTitle(Crud::PAGE_EDIT, 'Admin | Modification d\'un client');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Produit'),
-            AssociationField::new('category', 'Catégorie'),
-            TextareaField::new('description', 'Description'),
-            TextField::new('image', 'Url de l\'image'),
-            NumberField::new('price', 'Prix'),
-            NumberField::new('quantity', 'Stock'),
-            AssociationField::new('sizes', 'Tailles'),
-            AssociationField::new('gender', 'Genre'),
+            FormField::addPanel('Informations sur le client'),
+            TextField::new('firstname', 'Prénom'),
+            TextField::new('lastname', 'Nom'),
+            EmailField::new('email'),
+            TextField::new('address', 'Adresse'),
+            TextField::new('zipcode', 'Code postal'),
+            TextField::new('city', 'Ville'),
         ];
     }
 
@@ -55,16 +61,16 @@ class ProductCrudController extends AbstractCrudController
             ->add(Crud::PAGE_INDEX, $deleteAction)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
-            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setIcon('fa fa-plus-circle')->setLabel('Ajouter un produit');
-            })
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->remove(Crud::PAGE_INDEX, Action::NEW);
         ;
     }
+
 
     public function deleteAction(AdminContext $context, Request $request)
     {
         $id = $context->getRequest()->query->get('entityId');
-        $entity = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        $entity = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $this->deleteEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entity);
         $this->addFlash('success', 'Cet élément a bien été supprimé');
