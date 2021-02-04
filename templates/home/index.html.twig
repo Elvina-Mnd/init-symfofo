@@ -1,16 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 
 {% block body %}
 
 <div class="container">
-    {% include '_carousel.html.twig' %}
-    <div class="jumbotron">
-        <h1>Nanga def</h1>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, quam. Odit quo, accusamus inventore, rerum quaerat voluptatibus accusantium odio consequatur libero perspiciatis cum deleniti a, soluta facilis ipsa eius et?</p>
-    </div>
+	{% include '_carousel.html.twig' %}
+	<div class="row mt-5 text-background">
+		<div class="col-4"></div>
+		<div class="col-5 block-welcome">
+            <div class="text-center">
+			    <h1 class="yellow-title">Nanga def !*</h1>
+            </div>
+            <br>
+            <div class="text-center">
+                <strong> Notre objectif en créant Nanga def ?</strong>
+            </div>
+            <br>
+            Vous offrir un produit de qualité qui vous fasse voyager. Notre première création est une veste éthique en Wax. Un bombers intemporel, réversible, à la fois sobre et coloré.
+            <br>
+            Le partage est une valeur essentielle de la tradition sénégalaise. Nous avons voulu à notre tour avoir un impact économique et social en promouvant le savoir faire d’exception des artisans dakarois et en reversant 10% de nos bénéfices à l’association solidaire du village de Kiniabour.
+            <br>
+            <div class="smaller">
+            <p class="small-text text-right">*Bonjour !</p>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn-orange">En savoir plus</a>
+            </div>
+		</div>
+	</div>
+
+
 
     <div class="row pt-5">
         {% for category in categories %}
@@ -22,11 +43,4 @@
 
 {% endblock %}
 
-{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-
-            <!-- Renders app.js & a webpack runtime.js file
-                <script src="/build/runtime.js" defer></script>
-                <script src="/build/app.js" defer></script>
-                See note below about the "defer" attribute -->
-        {% endblock %}
+{% block javascripts %}{% endblock %}
