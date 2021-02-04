@@ -8,6 +8,11 @@
       <li class="nav-item">
         <a class="nav-link" href="{{path('shop')}}">Boutique</a>
       </li>
+      {% if is_granted('ROLE_ADMIN') %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('admin')}}">Administration</a>
+      </li>
+      {% endif %}
       <li class="nav-item dropleft d-none d-sm-block">
 						<a class="nav-item btn btn-dark text-center nav-link-button" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-user"></i>
