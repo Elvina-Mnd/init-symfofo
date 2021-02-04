@@ -12,7 +12,7 @@
                     <div class="text-psst">
                         <p>Psst... Avez-vous tout ce qu'il vous faut ?</p>
                         <div class="text-center">
-                            <a href="{{path('shop')}}"class="btn-fra">Continuer vos achats</a>
+                            <a href="{{path('shop')}}"class="btn">Continuer vos achats</a>
                         </div>
                     </div>
 					<table class="table table-cart">
@@ -32,11 +32,11 @@
 									<td>{{item.product.name}}</td>
 									<td>
 										<img src="{{item.product.image}}" alt="{{item.product.name}}" width="20%"></td>
-									<td>{{item.product.price}}
-										€</td>
+									<td>{{item.product.price|format_currency('EUR', locale='de')}}
+										</td>
 									<td>{{item.quantity}}</td>
-									<td>{{item.product.price * item.quantity}}
-										€</td>
+									<td>{{(item.product.price * item.quantity) |format_currency('EUR', locale='de')}}
+										</td>
 									<td>
 										<a href="{{path('cart_remove', {'id' : item.product.id})}}" class="btn btn-danger btn-sm">
 											<i class="fas fa-trash"></i>
@@ -51,7 +51,7 @@
 									TOTAL COMMANDE:
 								</td>
 								<td class="total-price">
-									{{total}}€ TTC
+									{{total|format_currency('EUR', locale='fr')}} TTC
 								</td>
 							</tr>
 						</tfoot>
@@ -63,7 +63,7 @@
 			<form method="POST" id="confirm">
 						<input type="text" class="d-none" name="command">
 						<div class="my-4 text-center">
-							<button type="submit" class="btn btn-success"><i class="fas fa-credit-card"></i>Procéder au paiement</button>
+							<button type="submit" class="btn-orange"><i class="fas fa-credit-card"></i> Procéder au paiement</button>
 						</div>
 					</form>
 			
@@ -71,10 +71,10 @@
 		{% else %}
 			<div class="text-center">
 				<h1 class="display-4 text-dark big-title">Votre panier est vide !</h1>
-				<img src="{{ asset('build/cart-framboise.png') }}" width="35%" alt="empty-cart">
+				<img src="{{ asset('build/empty-cart.png') }}" width="35%" alt="empty-cart">
 			</div>
-			<div class="text-center">
-				<a href="{{path('shop')}}" class="text-lg btn-fra">Retour à la boutique</a>
+			<div class="text-center mb-5">
+				<a href="{{path('shop')}}" class="text-lg btn-orange">Retour à la boutique</a>
 			</div>
 	    {% endif %}
     </div>
