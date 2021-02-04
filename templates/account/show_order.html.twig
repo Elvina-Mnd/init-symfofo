@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <a href="javascript:history.go(-1)" class="return-show">Retour à la page précédente</a>
+    <div class="text-center my-3">
+        <h1>Commande du {{ command.createdAt|date("d/m/Y") }} - référence n° {{ command.id }}</h1>
+    </div>
+<table class="table">
+        <thead>
+            <tr>
+                <th>Articles</th>
+                <th>Quantité</th>
+                <th class="d-none d-sm-table-cell">Prix</th> 
+            </tr>
+        </thead>
+        <tbody>
+                {% for product in products %}
+            <tr>
+                <td><a href="#">{{ product.product.name }}</a></td>
+                <td>{{ product.quantity }}</td>
+                <td class="d-none d-sm-table-cell">{{ product.price |format_currency('EUR', locale='de') }}</td>
+            </tr>
+                {% endfor %}
+                <th>TOTAL</th>
+                <th></th>
+                <th>{{ command.total |format_currency('EUR', locale='de') }}</th>
+                <td>
+            <tr>
+                <td>Adresse de livraison : <br>{{ app.user.address }} <br>{{ app.user.zipcode }} {{ app.user.city }}
+            </tr>
+            </td>    
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -4,25 +4,40 @@
 
 {% block body %}
 <div class="container mt-3">
-    <div class="mt-3 text-center my-3">
-        <h2>Bienvenue chez Nanga def, {{ app.user.firstname }} {{ app.user.lastname }} !</h2>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            {# <img src="{{ asset('build/myprofile.svg') }}" alt="My profile illustration" width="100%"></div> #}
-            <div class="col-lg-6 col-md-6 col-sm-12 my-5">
-            <ul>
-                <li><h5><span class="titles-account">Email</span>  : {{ app.user.email }}</h5></li>
-                <br>
-                <li><h5><span class="titles-account">Adresse de livraison</span> <br> {{ app.user.address }} 
-                        <br> {{ app.user.zipcode }} - {{ app.user.city }}
-                    </h5>
-                </li>
-                <br>
-            </ul>
-        </div>
-    </div>
-    
+	<div class="mt-3 text-center my-3">
+		<h2>Bienvenue chez Nanga def,
+			{{ app.user.firstname }}
+			{{ app.user.lastname }}
+			!</h2>
+	</div>
+	<div class="row">
+		<div
+			class="col-6">
+			{# <img src="{{ asset('build/myprofile.svg') }}" alt="My profile illustration" width="100%"></div> #}
+			<div class="col-lg-6 col-md-6 col-sm-12 my-5">
+				<ul>
+					<li>
+						<h5>
+							<span class="titles-account">Email</span>
+							:
+							{{ app.user.email }}</h5>
+					</li>
+					<br>
+					<li>
+						<h5>
+							<span class="titles-account">Adresse de livraison</span>
+							<br>
+							{{ app.user.address }}
+							<br>
+							{{ app.user.zipcode }}
+							-
+							{{ app.user.city }}
+						</h5>
+					</li>
+					<br>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

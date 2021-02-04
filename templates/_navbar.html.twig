@@ -16,7 +16,7 @@
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a href="{{path('account')}}">Mon compte</a>
 							<br>
-							<a href="#">Mes achats</a>
+							<a href="{{path('commands_all')}}">Mes achats</a>
 							<br>
 							<a href="{{path('app_logout')}}">
 								<i class="fas fa-sign-out-alt"></i>

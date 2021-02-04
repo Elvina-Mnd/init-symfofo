@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Entity\Command;
+use App\Entity\Invoice;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,5 +84,50 @@ class CartService
             return $total;
         }
         return $total;
+    }
+
+    public function command($user)
+    {
+        // check of available stock
+        // $error = 0;
+        // $panier = $this->session->get('panier');
+
+
+        // command creation
+        $command = new Command();
+
+        $command->setTotal($this->getTotalCart());
+        $command->setCreatedAt(new \DateTime('now'));
+        $command->setUser($user);
+        $em = $this->em;
+        $em->persist($command);
+        $em->flush();
+
+        // invoice product creation
+        $invoiceProducts = [];
+        foreach ($this->getCartInfos() as $item) {
+            $invoiceProduct = new Invoice();
+            $invoiceProduct->setProduct($item['product']);
+            $invoiceProduct->setCommand($command);
+            $invoiceProduct->setQuantity($item['quantity']);
+            $invoiceProduct->setPrice($item['product']->getPrice());
+            $em = $this->em;
+            $em->persist($invoiceProduct);
+            $em->flush();
+            array_push($invoiceProducts, $invoiceProduct);
+        }
+
+        // change quantity available after order
+        foreach ($this->getCartInfos() as $item) {
+            $updatedProduct = $item['product'];
+            $newQty = ($item['product']->getQuantity()) - $item['quantity'];
+            $updatedProduct->setQuantity($newQty);
+            $em = $this->em;
+            $em->persist($updatedProduct);
+            $em->flush();
+        }
+
+        $this->session->clear();
+        return $invoiceProducts;
     }
 }
