@@ -1,5 +1,104 @@
+@import 'variables.scss';
 @import "~bootstrap/scss/bootstrap";
 
-body {
 
+body {
+    margin: 0;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: inherit;
+    }
 }
+
+
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: black;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+// NAVBAR
+
+.btn-orange {
+    background-color: $orange;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 15px 15px;
+    border: 1px solid #de5a34;
+}
+
+.nav-link-button {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+
+// END NAV
+
+// FOOTER
+
+.footer{
+    a{
+        color: $orange;
+        text-decoration: none;
+    }
+    a:hover{
+        color: $orange;
+        text-decoration: underline;
+    }
+}
+
+// END FOOTER
+
+//HOMEPAGE
+
+.block-welcome{
+    box-shadow: 0px 0px 3px 4px rgba(209, 209, 209, 0.336);
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background: rgba(255, 255, 255, 0.76);
+}
+
+.small-text{
+    font-size: small;
+}
+
+.smaller{
+    padding-top: 5%;
+}
+
+.text-background{
+    background-image: url("../../assets/images/senegal.jpg");
+    background-repeat: no-repeat;
+}
+
+.yellow-title{
+    color: $orange;
+}
+
+//END HOMEPAGE
