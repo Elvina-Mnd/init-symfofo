@@ -30,7 +30,7 @@ class Gender
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="genders")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="genders")
      */
     private $products;
 
@@ -68,6 +68,7 @@ class Gender
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
+            $product->addGender($this);
         }
 
         return $this;
@@ -75,7 +76,9 @@ class Gender
 
     public function removeProduct(Product $product): self
     {
-        $this->products->removeElement($product);
+        if ($this->products->removeElement($product)) {
+            $product->removeGender($this);
+        }
 
         return $this;
     }
