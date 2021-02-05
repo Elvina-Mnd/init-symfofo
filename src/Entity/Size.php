@@ -30,7 +30,7 @@ class Size
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="sizes")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="sizes")
      */
     private $products;
 
@@ -68,6 +68,8 @@ class Size
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
+            $product->addSize($this);
+
         }
 
         return $this;
@@ -75,7 +77,9 @@ class Size
 
     public function removeProduct(Product $product): self
     {
-        $this->products->removeElement($product);
+        if ($this->products->removeElement($product)) {
+            $product->removeSize($this);
+        }
 
         return $this;
     }

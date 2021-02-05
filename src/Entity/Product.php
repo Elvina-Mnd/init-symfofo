@@ -56,12 +56,12 @@ class Product
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Size::class, mappedBy="products")
+     * @ORM\ManyToMany(targetEntity=Size::class, inversedBy="products")
      */
     private $sizes;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Gender::class, mappedBy="products")
+     * @ORM\ManyToMany(targetEntity=Gender::class, inversedBy="products")
      */
     private $gender;
 
@@ -172,7 +172,7 @@ class Product
     {
         if (!$this->sizes->contains($size)) {
             $this->sizes[] = $size;
-            $size->addProduct($this);
+            
         }
 
         return $this;
@@ -180,9 +180,7 @@ class Product
 
     public function removeSize(Size $size): self
     {
-        if ($this->sizes->removeElement($size)) {
-            $size->removeProduct($this);
-        }
+        $this->sizes->removeElement($size);
 
         return $this;
     }
@@ -212,5 +210,10 @@ class Product
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
